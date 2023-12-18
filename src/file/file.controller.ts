@@ -4,54 +4,53 @@ import {
   Get,
   Put,
   Delete,
-  Param,
-  Body,
+  //Param,
+  //Body,
   UploadedFile,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './file.service';
 import * as mime from 'mime-types';
+//import { query } from 'express';
 
-@Controller('bucket')
+@Controller('file')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 
-  @Post(':folderName/file/:fileName')
+  @Post()
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(
-    @Param('folderName') folderName: string,
-    @Param('fileName') baseFileName: string,
+    @Query('bucketName') bucketName: string,
+    @Query('fileName') baseFileName: string,
     @UploadedFile() file: Express.Multer.File,
   ) {
     const extension = mime.extension(file.mimetype);
     const fileName = extension ? `${baseFileName}.${extension}` : baseFileName;
-    return this.fileService.uploadFile(folderName, fileName, file.buffer);
+    return this.fileService.uploadFile(bucketName, fileName, file.buffer);
   }
 
-  @Get(':folderName/files')
-  listFiles(@Param('folderName') folderName: string) {
-    return this.fileService.listFiles(folderName);
+  @Get()
+  listFiles(@Query('bucketName') bucketName: string) {
+    return this.fileService.listFiles(bucketName);
   }
 
-  @Put(':folderName/file/:fileName')
+  @Put()
+  @UseInterceptors(FileInterceptor('file'))
   updateFile(
-    @Param('folderName') folderName: string,
-    @Param('fileName') fileName: string,
-    @Body() body: { newFileContent: Buffer },
+    @Query('bucketName') bucketName: string,
+    @Query('fileName') fileName: string,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    return this.fileService.updateFile(
-      folderName,
-      fileName,
-      body.newFileContent,
-    );
+    return this.fileService.updateFile(bucketName, fileName, file.buffer);
   }
 
-  @Delete(':folderName/file/:fileName')
+  @Delete()
   deleteFile(
-    @Param('folderName') folderName: string,
-    @Param('fileName') fileName: string,
+    @Query('bucketName') bucketName: string,
+    @Query('fileName') fileName: string,
   ) {
-    return this.fileService.deleteFile(folderName, fileName);
+    return this.fileService.deleteFile(bucketName, fileName);
   }
 }

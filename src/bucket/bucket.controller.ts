@@ -20,11 +20,6 @@ export class BucketController {
     return this.bucketService.createBucket(name);
   }
 
-  @Get(':name')
-  read(@Param('name') name: string) {
-    return this.bucketService.readBucket(name);
-  }
-
   @Put()
   update(@Body() body: { oldName: string; newName: string }) {
     console.log('ceck');

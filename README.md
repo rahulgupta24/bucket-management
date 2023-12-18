@@ -37,10 +37,10 @@ npm run start:prod
 ## Usage
 
 ### File Controller
-- **Upload a File**: `POST /bucket/:folderName/file/:fileName` with file data.
-- **List Files in a Bucket**: `GET /bucket/:folderName/files`.
-- **Update a File**: `PUT /bucket/:folderName/file/:fileName` with new file content.
-- **Delete a File**: `DELETE /bucket/:folderName/file/:fileName`.
+- **Upload a File**: `POST /bucket/:bucketName/file/:fileName` with file data.
+- **List Files in a Bucket**: `GET /bucket/:bucketName/files`.
+- **Update a File**: `PUT /bucket/:bucketName/file/:fileName` with new file content.
+- **Delete a File**: `DELETE /bucket/:bucketName/file/:fileName`.
 
 ### Bucket Controller
 - **Create a Bucket**: `POST /bucket/:name`.
