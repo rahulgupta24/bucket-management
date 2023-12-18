@@ -1,60 +1,82 @@
 
-# NestJS Bucket Management System
+
+# Project Bucket and File Management 
 
 ## Overview
-This NestJS project provides a robust file management system. It includes two main components:
-1. **File Controller**: Manages individual files within folders.
-2. **Bucket Controller**: Manages folders and lists all folders with pagination.
+Making a AWS S3 clone using NestJs
 
-## Prerequisites
+## Features
+- File Upload
+- File Update
+- File Deletion
+- List Files in a Bucket
+- Create, Update, and Delete Buckets
+- Paginated Listing of All Buckets
+
+## Getting Started
+These instructions will get your copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+What things you need to install the software and how to install them. For example:
 - Node.js
-- NestJS
-- A preferred database (if persistence is required)
+- NestJS CLI
+- Any other dependencies
 
-## Installation
+### Installing
+A step-by-step series of examples that tell you how to get a development environment running.
 
-To get the project up and running, follow these steps:
-
-```bash
-git clone https://github.com/rahulgupta24/bucket-management.git
-cd bucket-management
-npm install
-```
-
-## Running the app
-
-```bash
-# development
-npm run start
-
-# watch mode
-npm run start:dev
-
-# production mode
-npm run start:prod
-```
+1. Clone the repository
+   ```sh
+   git clone https://github.com/rahulgupta24/bucket-management
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run the application
+   ```sh
+   npm run start
+   ```
 
 ## Usage
+### File Management
+- **Upload a File:** 
+  - Endpoint: `[POST] /file`
+  - Parameters: `bucketName`, `fileName`
+  - Body: Form-data with the file
 
-### File Controller
-- **Upload a File**: `POST /bucket/:bucketName/file/:fileName` with file data.
-- **List Files in a Bucket**: `GET /bucket/:bucketName/files`.
-- **Update a File**: `PUT /bucket/:bucketName/file/:fileName` with new file content.
-- **Delete a File**: `DELETE /bucket/:bucketName/file/:fileName`.
+- **List Files in a Bucket:** 
+  - Endpoint: `[GET] /file`
+  - Query Parameters: `bucketName`
 
-### Bucket Controller
-- **Create a Bucket**: `POST /bucket/:name`.
-- **Read a Bucket**: `GET /bucket/:name`.
-- **Update a Bucket Name**: `PUT /bucket` with JSON body `{ "oldName": "old", "newName": "new" }`.
-- **Delete a Bucket**: `DELETE /bucket/:name`.
-- **List All Folders with Pagination**: `GET /bucket/list/all` with optional query parameters `pageSize` and `page`.
+- **Update a File:** 
+  - Endpoint: `[PUT] /file`
+  - Parameters: `bucketName`, `fileName`
+  - Body: Form-data with the file
+
+- **Delete a File:** 
+  - Endpoint: `[DELETE] /file`
+  - Query Parameters: `bucketName`, `fileName`
+
+### Bucket Management
+- **Create a Bucket:** 
+  - Endpoint: `[POST] /bucket/:name`
+
+- **Rename a Bucket:** 
+  - Endpoint: `[PUT] /bucket`
+  - Body: JSON with `oldName` and `newName`
+
+- **Delete a Bucket:** 
+  - Endpoint: `[DELETE] /bucket/:name`
+
+- **List All Buckets (Paginated):** 
+  - Endpoint: `[GET] /bucket/list/all`
+  - Query Parameters: `pageSize`, `page`
 
 ## Contributing
-Contributions to the project are welcome. Please follow the standard fork, branch, and pull request workflow.
+Instructions for how to contribute to your project.
 
 ## License
-[Your License Choice]
+MIT.
 
 ---
-
-Remember to replace `[Your-Repository-Link]` and `[Your-Repository-Name]` with your actual repository details. Also, you may need to add additional instructions or details specific to your project, such as environment setup, API documentation links, etc.
